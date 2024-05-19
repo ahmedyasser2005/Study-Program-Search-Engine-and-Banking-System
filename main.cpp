@@ -3,6 +3,10 @@
 #include <vector>
 using namespace std;
 
+// Pre-Definitions
+class user_account;
+class university;
+bool basedOnProfile(user_account&, university&);
 // Classes ========================================================
 class bank_account{
 private:
@@ -107,6 +111,8 @@ public:
         return (score1 > score2) ? true : false;
     }
 
+    friend bool basedOnProfile(user_account&, university&);
+
     // Set Methods
     void setUsername(string un) { username = un; }
     void setEmail(string em)    { email = em;    }
@@ -174,10 +180,24 @@ public:
              << desc << "\n\n";
     }
 
-    double getTuitionFees() const { return tution_fees; }
-    unsigned int getRanking() const { return ranking; }
+    friend bool basedOnProfile(user_account&, university&);
+
+    double getTuitionFees()         const { return tution_fees; }
+    unsigned int getRanking()       const { return ranking;     }
+    unsigned short getDegreeLvl()   const { return degree_lvl;  }
+    unsigned short getEnglishLvl()  const { return english_lvl; }
+    float getGPA()                  const { return gpa;         }
 
 };
+
+bool basedOnProfile(user_account& student, university& uni){
+    if (student.getGPA() >= uni.getGPA()
+    && student.getEnglishLvl() >= uni.getEnglishLvl()
+    && student.getDegreeLvl() == uni.getDegreeLvl())
+        return true;
+    else
+        return false;
+}
 
 // Global Variables ========================================================
 inline unsigned short choose(unsigned short from,unsigned short to){
@@ -367,17 +387,17 @@ inline void studyFinderProfileSearchDisplay(string username){
          << "|| |[0]| Back.\n"
          << "==================================================================\n\n";
 }
-inline void studyFinderCustomisedSearchDisplay(string username){
+inline void studyFinderCustomisedSearchDisplay(string username, string country, string deg_lvl, string stu_prog, string gpa, string eng_lvl, string tuition){
     cout << "\033[2J\033[1;1H";
     cout << "|=-=-=-=-=|    StudyFinder    |=-=-=-=-=|\n"
          << "|=-=-=-=-=|    Hi, " << username << "    |=-=-=-=-=|\n\n"
          << "=======================| Custom Search |=======================\n"
-         << "|| |[1]| Country         :\n"
-         << "|| |[2]| Degree Level    :\n"
-         << "|| |[3]| Study Programme :\n"
-         << "|| |[4]| GPA             :\n"
-         << "|| |[5]| English Level   :\n"
-         << "|| |[6]| Tuition Fees    :\n"
+         << "|| |[1]| Country         :" << "         " << country << '\n'
+         << "|| |[2]| Degree Level    :" << "         " << deg_lvl << '\n'
+         << "|| |[3]| Study Programme :" << "         " << stu_prog << '\n'
+         << "|| |[4]| GPA             :" << "         " << gpa << '\n'
+         << "|| |[5]| English Level   :" << "         " << eng_lvl << '\n'
+         << "|| |[6]| Tuition Fees    :" << "         " << tuition << '\n'
          << "|| |[7]| Search...\n"
          << "|| |[0]| Back.\n"
          << "==================================================================\n\n";
@@ -440,6 +460,7 @@ void studyFinderRegister(string, string, string, unsigned short);
 void studentProfileSettings(user_account&);
 void accountSecuritySettings(user_account&, unsigned short);
 void studyFinderSearchEngine(user_account&);
+void studyFinderCustomSearch(user_account&, string, string, string, string, string, string);
 void studyFinderShowAllOptions(user_account&);
 void studyFinder();
 void studyFinderMainMenu(user_account&);
@@ -866,23 +887,67 @@ void accountSecuritySettings(user_account& account, unsigned short msg = 0){
     }
 }
 
+void studyFinderCustomSearch(user_account& account, string country = "___", string deg_lvl = "___", string stu_prog = "___", string gpa = "___", string eng_lvl = "___", string tuition = "___"){
 
-void studyFinderSearchEngine(user_account& account){
-    
-        // << "|| |[1]| Custom Search.\n"
-        //  << "|| |[2]| Search based on profile.\n"
-        //  << "|| |[3]| Show all options...\n"
-        //  << "|| |[0]| Back.\n"
+    studyFinderCustomisedSearchDisplay(account.getUsername(), country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
 
-    studyFinderSearchEngineDisplay(account.getUsername());
-
-    switch(choose(0, 3)){
-        case 1: 
+    switch(choose(0, 7)){
+        case 1:
+            {
+                cout << "|[USER-INPUT]| Enter your desired country name: ";
+                cin >> country;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
         case 2:
-        case 3: studyFinderShowAllOptions(account); break;
-        case 0: studyFinderMainMenu(account); return;
+            {
+                cout << "|[USER-INPUT]| Enter your desired degree level: ";
+                cin >> deg_lvl;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
+        case 3: 
+            {
+                cout << "|[USER-INPUT]| Enter your desired study programme: ";
+                cin >> stu_prog;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
+        case 4: 
+            {
+                cout << "|[USER-INPUT]| Enter minimum GPA: ";
+                cin >> gpa;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
+        case 5: 
+            {
+                cout << "|[USER-INPUT]| Enter minimum English level: ";
+                cin >> eng_lvl;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
+        case 6: 
+            {
+                cout << "|[USER-INPUT]| Enter maximum tuition fees: ";
+                cin >> tuition;
+                studyFinderCustomSearch(account, country, deg_lvl, stu_prog, gpa, eng_lvl, tuition);
+            }
+            break;
+        case 0: studyFinderSearchEngine(account); return;
     }
 
+}
+void studyFinderSearchBasedOnProfile(user_account& account){
+
+    for (int i = 0; i < universities_data.size(); ++i){
+    
+        if (basedOnProfile(account, universities_data[i])){
+    
+            universities_data[i].showInList(i);
+    
+        }
+    }
 }
 void studyFinderShowAllOptions(user_account& account){
 
@@ -977,6 +1042,18 @@ void studyFinderShowAllOptions(user_account& account){
         studyFinderShowAllOptions(account);
     }
 
+
+}
+void studyFinderSearchEngine(user_account& account){
+
+    studyFinderSearchEngineDisplay(account.getUsername());
+
+    switch(choose(0, 3)){
+        case 1: studyFinderCustomSearch(account); break;
+        case 2: studyFinderSearchBasedOnProfile(account); break;
+        case 3: studyFinderShowAllOptions(account); break;
+        case 0: studyFinderMainMenu(account); return;
+    }
 
 }
 void studyFinder(){
