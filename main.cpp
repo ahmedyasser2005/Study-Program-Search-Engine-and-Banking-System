@@ -637,7 +637,7 @@ inline void accountSecuritySettingsDisplay(const string& username, unsigned shor
     displayErrorMessage(msg, messages);
 }
 
-// Main Functions Definitions ========================================================
+// Main Functions Pre-Definition ========================================================
 // Bank
 void bankLogin(unsigned int, string, unsigned short);
 void bankRegister(string, string, unsigned short, unsigned int);
