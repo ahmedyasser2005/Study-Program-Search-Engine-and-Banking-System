@@ -78,8 +78,46 @@ enum degree_level { Highschool = 1, Undergraduate, Postgraduate };
 enum english_level { A1 = 1, A2, B1, B2, C1, C2 };
 enum study_programme { ComputerScience = 1, Engineering, Business, Arts, Media, Law};
 
-// Implementations of Input Function of the Enums
-region inputRegion() {
+// Implementations of Input Functions
+unsigned int inputNumber(unsigned int& num){
+    while (true) {
+        cout << "Enter num (0 - 125): ";
+        cin >> num;
+        if (!cin.fail() && num >= 0) {
+            return num;
+        } else {
+            clearInput();
+            cout << "Invalid input. Please enter a number more than or equal 0.\n";
+        }
+    }
+}
+unsigned short inputAge(){
+    unsigned short age;
+    while (true) {
+        cout << "Enter age (0 - 125): ";
+        cin >> age;
+        if (!cin.fail() && age >= 0 && age <= 125) {
+            return age;
+        } else {
+            clearInput();
+            cout << "Invalid input. Please enter an age between 0 and 125.\n";
+        }
+    }
+}
+double inputGPA(){
+    double gpa;
+    while (true) {
+        cout << "Enter GPA (0.0 - 4.0): ";
+        cin >> gpa;
+        if (!cin.fail() && gpa >= 0.0 && gpa <= 4.0) {
+            return gpa;
+        } else {
+            clearInput();
+            cout << "Invalid input. Please enter a GPA between 0.0 and 4.0.\n";
+        }
+    }
+}
+region inputRegion(){
     int choice;
     while (true) {
         cout << "Select region (1: Africa, 2: Europe, 3: America, 4: Asia): ";
@@ -92,7 +130,7 @@ region inputRegion() {
         }
     }
 }
-gender inputGender() {
+gender inputGender(){
     int choice;
     while (true) {
         cout << "Select gender (0: Male, 1: Female): ";
@@ -105,7 +143,7 @@ gender inputGender() {
         }
     }
 }
-degree_level inputDegreeLevel() {
+degree_level inputDegreeLevel(){
     int choice;
     while (true) {
         cout << "Select degree level (1: Highschool, 2: Undergraduate, 3: Postgraduate): ";
@@ -118,7 +156,7 @@ degree_level inputDegreeLevel() {
         }
     }
 }
-english_level inputEnglishLevel() {
+english_level inputEnglishLevel(){
     int choice;
     while (true) {
         cout << "Select English level (1: A1, 2: A2, 3: B1, 4: B2, 5: C1, 6: C2): ";
@@ -131,7 +169,7 @@ english_level inputEnglishLevel() {
         }
     }
 }
-study_programme inputStudyProgramme() {
+study_programme inputStudyProgramme(){
     int choice;
     while (true) {
         cout << "Select study programme (1: Computer Science, 2: Engineering, 3: Business, 4: Arts, 5: Media): ";
@@ -679,8 +717,7 @@ void bankLogin(unsigned int accountNumber = 0, string pinCode = "*** PIN Code...
     switch(choose(0, 3)){
         case 1:
             cout << "|[USER-INPUT]| Enter your account number: ";
-            cin >> accountNumber;
-            bankLogin(accountNumber, pinCode, 0);
+            bankLogin(inputNumber(accountNumber), pinCode, 0);
             break;
         case 2:
             cout << "|[USER-INPUT]| Enter your PIN code: ";
@@ -721,7 +758,8 @@ void bankRegister(string accountName = "*** Account Name...", string pinCode = "
     switch(choose(0, 3)){
         case 1:
             cout << "|[USER-INPUT]| Create your account name: ";
-            cin >> accountName;
+            clearInput();
+            getline(cin, accountName);
             bankRegister(accountName, pinCode, msg);
             break;
         case 2:
@@ -978,60 +1016,55 @@ void studyFinderProfileSettings(studyFinderAccount& account){
     switch(choose(0, 7)){
         case 1:
         {
-            string input;
             cout << "|[USER-INPUT]| Enter your Real Name: ";
-            cin >> input;
+            
+            string input;
+            clearInput();
+            getline(cin, input);
+            
             account.setRealName(input);
             studyFinderProfileSettings(account);
         }
             break;
         case 2:
         {
-            gender input = inputGender();
             cout << "|[USER-INPUT]| Enter your Gender: ";
-            account.setGender(input);
+            account.setGender(inputGender());
             studyFinderProfileSettings(account);
         }
             break;
         case 3:
         {
-            unsigned short input;
             cout << "|[USER-INPUT]| Enter your Age: ";
-            cin >> input;
-            account.setAge(input);
+            account.setAge(inputAge());
             studyFinderProfileSettings(account);
         }
             break;
         case 4:
         {
-            region input = inputRegion();
             cout << "|[USER-INPUT]| Enter your Region: ";
-            account.setRegion(input);
+            account.setRegion(inputRegion());
             studyFinderProfileSettings(account);
         }
             break;
         case 5:
         {
-            degree_level input = inputDegreeLevel();
             cout << "|[USER-INPUT]| Enter your recent finished degree level: ";
-            account.setDegreeLvl(input);
+            account.setDegreeLvl(inputDegreeLevel());
             studyFinderProfileSettings(account);
         }
             break;
         case 6:
         {
-            float input;
             cout << "|[USER-INPUT]| Enter your GPA: ";
-            cin >> input;
-            account.setGPA(input);
+            account.setGPA(inputGPA());
             studyFinderProfileSettings(account);
         }
             break;
         case 7:
         {
-            english_level input = inputEnglishLevel();
             cout << "|[USER-INPUT]| Enter your English level: ";
-            account.setEnglishLvl(input);
+            account.setEnglishLvl(inputEnglishLevel());
             studyFinderProfileSettings(account);
         }
             break;
@@ -1045,18 +1078,23 @@ void studyFinderAccountSecuritySettings(studyFinderAccount& account, unsigned sh
     switch(choose(0, 2)){
         case 1:
         {
-            string input;
             cout << "|[USER-INPUT]| Enter your new username: ";
-            cin >> input;
+            
+            string input;
+            clearInput();
+            getline(cin, input);
+            
             account.setUsername(input);
             studyFinderAccountSecuritySettings(account);
         }
             break;
         case 2:
         {
-            string input;
             cout << "|[USER-INPUT]| Enter your current Password: ";
+            
+            string input;
             cin >> input;
+            
             if (input == account.getPassword()){
                 cout << "|[USER-INPUT]| Enter your new Password: ";
                 cin >> input;
