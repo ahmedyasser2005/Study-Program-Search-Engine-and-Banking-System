@@ -298,6 +298,7 @@ private:
     string name;
     string desc;
     study_programme programme;
+    double application_fees;
     double tuition_fees;
     static int counter;
     bankAccount uniBank;
@@ -305,9 +306,9 @@ private:
 public:
     // Constructor
     university(const string& _name = "", region _region = Africa, const string& _desc = "", study_programme _prog = {ComputerScience}, degree_level _degree_lvl = Highschool, english_level _english_lvl = A1,
-               double _tuition_fees = 0.0, float _gpa = 0.0)
+               double _application_fees = 0.0, double _tuition_fees = 0.0, float _gpa = 0.0)
             : person(_region, _gpa, _degree_lvl, _english_lvl),
-              name(_name), desc(_desc), programme(_prog), tuition_fees(_tuition_fees), uniBank(name, "", 100000 + counter) {
+              name(_name), desc(_desc), programme(_prog), application_fees(_application_fees), tuition_fees(_tuition_fees), uniBank(name, "", 100000 + counter) {
         ++counter;
     }
 
@@ -333,6 +334,7 @@ public:
              << " | Programme: " << programme << '\n'
              << " | Minimum GPA Required: " << gpa << '\n'
              << " | Minimum English Level Required: " << english_lvl << '\n'
+             << " | Application Fees: " << application_fees << "$.\n"
              << " | Tuition Fees: " << tuition_fees << "$ / Year.\n"
              << desc << "\n\n";
     }
@@ -343,6 +345,7 @@ public:
     }
 
     // Get Methods
+    double getApplicationFees()     const { return application_fees; }
     double getTuitionFees()         const { return tuition_fees; }
     degree_level getDegreeLvl()     const { return degree_lvl;   }
     english_level getEnglishLvl()   const { return english_lvl;  }
@@ -381,18 +384,18 @@ int bankAccount::counter = 0;
 int university::counter = 0;
 
 // Testing Data
-university uni1("Oxford University", region::Europe, "The University of Oxford is a collegiate research university in Oxford, England. There is evidence of teaching as early as 1096, making it the oldest university in the English-speaking world and the world's second-oldest university in continuous operation.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 50000, 3.9);
-university uni2("Harvard University", region::America, "Established in 1636, Harvard is the oldest higher education institution in the United States, and is widely regarded in terms of its influence, reputation, and academic pedigree as a leading university in not just the US but also the world.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 40000, 3.8);
-university uni3("Cambridge University", region::Europe, "The University of Cambridge is one of the world's oldest universities and leading academic centres, and a self-governed community of scholars. Established in 1209, the University is rich in history.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 30000, 3.7);
-university uni4("Stanford University", region::America, "A private research university located in Stanford, California. Known for its entrepreneurial culture and proximity to Silicon Valley.", study_programme::Engineering, degree_level::Undergraduate, english_level::C1, 60000, 3.95);
-university uni5("National University of Singapore", region::Asia, "A leading research university in Singapore. Offers a broad range of disciplines in engineering, science, business, and the arts and humanities.", study_programme::Business, degree_level::Postgraduate, english_level::B2, 45000, 3.8);
-university uni6("Massachusetts Institute of Technology (MIT)", region::America, "A private research university focused on science, technology, engineering, and mathematics. Renowned for its innovation and entrepreneurship.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::C2, 70000, 4.0);
-university uni7("University of Tokyo", region::Asia, "A public research university located in Tokyo, Japan. Considered one of the most prestigious universities in Asia.", study_programme::Arts, degree_level::Undergraduate, english_level::B1, 35000, 3);
-university uni8("University of Toronto", region::America, "A public research university in Toronto, Canada. Consistently ranked among the top universities worldwide.", study_programme::Media, degree_level::Undergraduate, english_level::B2, 42000, 3.8);
-university uni9("École Polytechnique Fédérale de Lausanne (EPFL)", region::Europe, "A Swiss public research university in Lausanne, focused on science and technology. Renowned for its engineering and computer science programs.", study_programme::Engineering, degree_level::Postgraduate, english_level::C1, 55000, 3.9);
-university uni10("The University of Melbourne", region::Asia, "A public research university in Melbourne, Australia. One of Australia's oldest universities and a member of the prestigious Group of Eight research universities.", study_programme::Business, degree_level::Undergraduate, english_level::B2, 38000, 3.7);
-university uni11("University of Cape Town (UCT)", region::Africa, "A public research university in Cape Town, South Africa. The oldest university in South Africa and a renowned institution for research and teaching.", study_programme::Arts, degree_level::Undergraduate, english_level::B1, 25000, 3.6);
-university uni12("Peking University", region::Asia, "A national research university in Beijing, China. Considered one of China's most prestigious universities, with a strong focus on humanities and social sciences.", study_programme::Law, degree_level::Postgraduate, english_level::C2, 40000, 3.9);
+university uni1("Oxford University", region::Europe, "The University of Oxford is a collegiate research university in Oxford, England. There is evidence of teaching as early as 1096, making it the oldest university in the English-speaking world and the world's second-oldest university in continuous operation.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 10, 50000, 3.9);
+university uni2("Harvard University", region::America, "Established in 1636, Harvard is the oldest higher education institution in the United States, and is widely regarded in terms of its influence, reputation, and academic pedigree as a leading university in not just the US but also the world.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 10, 40000, 3.8);
+university uni3("Cambridge University", region::Europe, "The University of Cambridge is one of the world's oldest universities and leading academic centres, and a self-governed community of scholars. Established in 1209, the University is rich in history.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::B2, 10, 30000, 3.7);
+university uni4("Stanford University", region::America, "A private research university located in Stanford, California. Known for its entrepreneurial culture and proximity to Silicon Valley.", study_programme::Engineering, degree_level::Undergraduate, english_level::C1, 10, 60000, 3.95);
+university uni5("National University of Singapore", region::Asia, "A leading research university in Singapore. Offers a broad range of disciplines in engineering, science, business, and the arts and humanities.", study_programme::Business, degree_level::Postgraduate, english_level::B2, 10, 45000, 3.8);
+university uni6("Massachusetts Institute of Technology (MIT)", region::America, "A private research university focused on science, technology, engineering, and mathematics. Renowned for its innovation and entrepreneurship.", study_programme::ComputerScience, degree_level::Undergraduate, english_level::C2, 10, 70000, 4.0);
+university uni7("University of Tokyo", region::Asia, "A public research university located in Tokyo, Japan. Considered one of the most prestigious universities in Asia.", study_programme::Arts, degree_level::Undergraduate, english_level::B1, 10, 35000, 3);
+university uni8("University of Toronto", region::America, "A public research university in Toronto, Canada. Consistently ranked among the top universities worldwide.", study_programme::Media, degree_level::Undergraduate, english_level::B2, 10, 42000, 3.8);
+university uni9("École Polytechnique Fédérale de Lausanne (EPFL)", region::Europe, "A Swiss public research university in Lausanne, focused on science and technology. Renowned for its engineering and computer science programs.", study_programme::Engineering, degree_level::Postgraduate, english_level::C1, 10, 55000, 3.9);
+university uni10("The University of Melbourne", region::Asia, "A public research university in Melbourne, Australia. One of Australia's oldest universities and a member of the prestigious Group of Eight research universities.", study_programme::Business, degree_level::Undergraduate, english_level::B2, 10, 38000, 3.7);
+university uni11("University of Cape Town (UCT)", region::Africa, "A public research university in Cape Town, South Africa. The oldest university in South Africa and a renowned institution for research and teaching.", study_programme::Arts, degree_level::Undergraduate, english_level::B1, 10, 25000, 3.6);
+university uni12("Peking University", region::Asia, "A national research university in Beijing, China. Considered one of China's most prestigious universities, with a strong focus on humanities and social sciences.", study_programme::Law, degree_level::Postgraduate, english_level::C2, 10, 40000, 3.9);
 
 // Vectors To Store Data
 vector<bankAccount> bank_accounts_data = {uni1.getBank(), uni2.getBank(), uni3.getBank(), uni4.getBank(), uni5.getBank(), uni6.getBank(), uni7.getBank(), uni8.getBank(), uni9.getBank(), uni10.getBank(), uni11.getBank(), uni12.getBank()};
@@ -1075,9 +1078,9 @@ void studyFinderSelect(studyFinderAccount& account, university& selectedUni) {
         case 1:
             if (qualificationCheck(account, selectedUni)) {
                 cout << BOLD << GREEN << "|[STUDY-FINDER]| Congratulations, You are qualified for this study opportunity!\n" << RESET
-                     << "|[STUDY-FINDER]| Please head to the bank application and transfer " << selectedUni.getTuitionFees() << "$ to the following account number: " << BOLD << RED << selectedUni.getBank().getNumber() << "\n\n" << RESET
-                     << "|| [1] Pay Tuition Fees...\n"
-                     << "|| [0] Back.\n\n";
+                     << "|[STUDY-FINDER]| Please head to the bank and pay the application fees " << BOLD << RED << selectedUni.getApplicationFees() << '$' << RESET << " to the following account number: " << BOLD << RED << selectedUni.getBank().getNumber() << RESET << " to begin your application proccess.\n\n"
+                     << "|| [1] Bank...\n"
+                     << "|| [0] Back\n\n";
                 if (choose(0, 1)) {
                     bank();
                 }else{
