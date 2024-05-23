@@ -337,9 +337,9 @@ public:
              << desc << "\n\n";
     }
     void showInList(int i) const {
-        cout << "|[" << i + 1 << "]| Uni: " << name << " | Region: " << p_region
-             << " | Degree: " << degree_lvl << " | Programme: " << programme
-             << " | Tuition Fees: " << tuition_fees << "$.\n" << desc << "\n\n";
+        cout << BOLD << CYAN << "|[" << i + 1 << "]| " << RESET << GREEN << "Uni: " << name << " | Region: " << p_region
+             << " | Degree: " << degree_lvl << " | Programme: " << programme << " | GPA Required: " << gpa
+             << " | Tuition Fees: " << tuition_fees << "$.\n" << RESET << YELLOW << desc << "\n\n" << RESET;
     }
 
     // Get Methods
@@ -1074,8 +1074,8 @@ void studyFinderSelect(studyFinderAccount& account, university& selectedUni) {
     switch (choose(0, 1)) {
         case 1:
             if (qualificationCheck(account, selectedUni)) {
-                cout << "|[STUDY-FINDER]| Congratulations, You are qualified for this study opportunity!\n"
-                     << "|[STUDY-FINDER]| Please head to the bank application and transfer " << selectedUni.getTuitionFees() << "$ to the following account number: " << selectedUni.getBank().getNumber() << "\n\n"
+                cout << BOLD << GREEN << "|[STUDY-FINDER]| Congratulations, You are qualified for this study opportunity!\n" << RESET
+                     << "|[STUDY-FINDER]| Please head to the bank application and transfer " << selectedUni.getTuitionFees() << "$ to the following account number: " << BOLD << RED << selectedUni.getBank().getNumber() << "\n\n" << RESET
                      << "|| [1] Pay Tuition Fees...\n"
                      << "|| [0] Back.\n\n";
                 if (choose(0, 1)) {
@@ -1084,7 +1084,7 @@ void studyFinderSelect(studyFinderAccount& account, university& selectedUni) {
                     studyFinderShowResults(account); return;
                 }
             } else {
-                cout << "|[STUDY-FINDER]| Unfortunately, you do not qualify for this study opportunity.\n"
+                cout << RED << "|[STUDY-FINDER]| Unfortunately, you do not qualify for this study opportunity.\n" << RESET
                      << "|[STUDY-FINDER]| Type '0' to continue...\n";
                 switch (choose(0, 0)){
                     case 0: studyFinderShowResults(account); return;
