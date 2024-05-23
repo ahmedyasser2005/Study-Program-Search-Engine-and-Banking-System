@@ -28,7 +28,8 @@ inline void clearInput() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 inline void clearScreen() {
-    system("cls");
+    // system("cls");
+    cout << "\033[2J\033[1;1H";
 }
 
 inline void displayHeader(const string& title) {
@@ -602,10 +603,10 @@ inline void studyFinderShowAllOptionsDisplay(const string& username, int counter
     cout << BOLD << YELLOW << "| Welcome, " << username << " |\n\n"
          << "===========|  Show All | ==== | Found: " << counter << " |===========|\n" << RESET;
     vector<string> options = {
-        "Sort by higher tuition fees",
-        "Sort by lower tuition fees",
-        "Sort by higher acceptance chance",
-        "Sort by lower acceptance chance",
+        "Sort by tuition fees (higher to lower)",
+        "Sort by tuition fees (lower to higher)",
+        "Sort by acceptance chance (higher to lower)",
+        "Sort by acceptance chance (lower to higher)",
         "Back"
     };
     displayOptions(options);
