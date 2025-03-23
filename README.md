@@ -140,7 +140,7 @@ g++ -std=c++11 -o studyfinder main.cpp
 
 👨‍💻 **Ahmed Yasser Eissa**\
 📍 **Artificial Intelligence Science Student @ Galala University**\
-🔗 [LinkedIn Profile](https://www.linkedin.com/in/ahmed-yasser)
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/ahmed-ysr-eissa)
 
 ---
 
