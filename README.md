@@ -1,4 +1,4 @@
-# StudyFinder & Banking System - C++ CLI Application
+# StudyFinder & Banking System
 
 ## Overview
 
