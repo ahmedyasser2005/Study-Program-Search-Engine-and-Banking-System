@@ -1,50 +1,149 @@
-# "Scholarship Search Engine (formerly Study-Finder)", OOP Project
+# StudyFinder & Banking System - C++ CLI Application
 
-## Project Overview
-This project is a C++ console application developed as part of the Object-Oriented Programming course at Galala University. It manages scholarships, user accounts, and university details using object-oriented programming (OOP) principles, including inheritance, polymorphism, and encapsulation.
+## Overview
+
+This project is a **C++ Command-Line Interface (CLI) application** that integrates two core subsystems:
+
+- **Banking System:** Enables users to create bank accounts, log in, deposit, withdraw, transfer funds, and manage PIN codes.
+- **StudyFinder System:** Helps students search and apply for university programs based on their qualifications, including GPA and English proficiency.
+
+The application utilizes **object-oriented programming (OOP)** principles and incorporates structured data handling with vectors and classes, making it a strong example of **C++ software development** for practical use cases.
+
+---
 
 ## Features
-User and Account Management:
-Handles various types of accounts, including general user accounts and specialized bankAccount and studyFinderAccount types.
 
-University and Scholarship Search:
-Allows users to search for available scholarships linked to specific universities. Implemented through a class-based structure.
+### **General Features**
 
-User-Friendly Interface:
-Designed with ANSI color codes and a menu-driven console interface for easy navigation and interaction.
+- Intuitive CLI with a user-friendly menu-driven interface.
+- **ANSI Colorized Output** for improved readability.
+- Robust **input validation** to prevent errors and invalid entries.
 
-Error Handling:
-Robust input validation and error messaging system to ensure smooth user experience.
+### **Banking System**
 
-## Class Structure
-The project uses a multi-level class hierarchy with key classes as follows:
+✅ **User Authentication:** Secure login and account registration.
 
-person:
-Base class representing an individual, potentially a scholarship applicant or account holder.
+✅ **Financial Transactions:**
+- Deposit and withdraw funds (with validation limits).
+- Transfer funds between accounts.
 
-account:
-Base class for handling general account-related operations.
+✅ **Account Management:**
+- View account details.
+- Change PIN code securely.
 
-bankAccount:
-Inherits from account and manages financial operations related to the user's account.
+✅ **Transaction Receipt:** Displays confirmation messages for financial actions.
 
-studyFinderAccount:
-Specialized class for managing scholarship-related details and search functions.
+### **StudyFinder System**
 
-university:
-Class representing universities, storing information that allows users to search for scholarships linked to them.
+✅ **User Profile Management:**
+- Create and update student profiles (GPA, English level, etc.).
 
-## Technologies Used
-C++
-Object-Oriented Programming (OOP)
-Inheritance and Polymorphism
-Vectors for data storage
-Console I/O and ANSI color codes for the user interface
+✅ **University Search & Sorting:**
+- Filter universities based on **tuition fees** and **acceptance chances**.
 
-## Team Members
-- Ahmed Yasser Eissa
-- Khadija Osama Ahmed
-- Mostafa Mohamed Saleh
-- Mahros Mohamed Mahros
-- Ahmed Yasser Lotfy
-- Youssef Ahmed Eldasoky
+✅ **Qualification Checking:**
+- Automatically assesses eligibility for a selected university program.
+
+✅ **Application Process:**
+- Guides users to pay application fees through the Banking System.
+
+---
+
+## System Architecture
+
+### **Class Overview**
+
+| Class Name           | Description                                                   |
+| -------------------- | ------------------------------------------------------------- |
+| `person`             | Base class representing a user with personal details.         |
+| `account`            | Handles username, password, and authentication.               |
+| `bankAccount`        | Inherits from `account` and provides banking features.        |
+| `studyFinderAccount` | Inherits from `person` & `account`, represents student users. |
+| `university`         | Stores university data, requirements, and fees.               |
+| `receipt`            | Generates transaction receipts for banking operations.        |
+
+### **Data Handling**
+
+- Universities are stored as objects in a **vector**.
+- Student and banking accounts are dynamically managed.
+- Sorting is applied to **filter universities** by tuition and eligibility.
+
+---
+
+## Installation & Execution
+
+### **Requirements**
+
+- A **C++ compiler** (e.g., g++, MSVC, Clang)
+- Terminal or Command Prompt
+
+### **Compilation**
+
+```sh
+# Compile the program using g++
+g++ -std=c++11 -o studyfinder main.cpp
+```
+
+### **Run the Application**
+
+```sh
+# Execute the program
+./studyfinder
+```
+
+---
+
+## Sample Usage
+
+### **1️⃣ Main Menu**
+
+```
+=-=-=-=-=-=-=- OOP Project -=-=-=-=-=-=-=-
+
+|[1]| Open StudyFinder
+|[2]| Open BankingSystem
+|[0]| Exit
+```
+
+### **2️⃣ Banking System**
+
+```
+=-=-=-=-=-=-=- Banking System -=-=-=-=-=-=-=-
+
+|[1]| Log in to your bank account
+|[2]| Create a new bank account
+|[0]| Back
+```
+
+### **3️⃣ StudyFinder System**
+
+```
+=-=-=-=-=-=-=- StudyFinder -=-=-=-=-=-=-=-
+
+|[1]| Log in
+|[2]| Create a new account
+|[0]| Back
+```
+
+---
+
+## Future Enhancements
+
+🚀 **Database Integration** - Store and retrieve user data persistently.\
+🚀 **Graphical User Interface (GUI)** - Upgrade from CLI to a web interface.\
+🚀 **Advanced Filtering** - Add more parameters for university searches.\
+🚀 **Scholarship Recommendations** - Suggest financial aid options based on user profiles.
+
+---
+
+## Contributors
+
+👨‍💻 **Ahmed Yasser Eissa**\
+📍 **Artificial Intelligence Science Student @ Galala University**\
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/ahmed-yasser)
+
+---
+
+## License
+
+🛡️ **MIT License** - Free to use and modify for educational & professional purposes.
